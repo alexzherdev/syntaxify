@@ -1,0 +1,42 @@
+{
+  "name": "syntaxify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "prettier": "prettier --write src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexzherdev/syntaxify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexzherdev/syntaxify/issues"
+  },
+  "homepage": "https://github.com/alexzherdev/syntaxify#readme",
+  "dependencies": {
+    "@babel/parser": "^7.9.6",
+    "@babel/traverse": "^7.9.6",
+    "@babel/types": "^7.9.6",
+    "monaco-editor": "^0.20.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.6",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.0.1",
+    "jest-raw-loader": "^1.0.1",
+    "monaco-editor-webpack-plugin": "^1.9.0",
+    "prettier": "^2.0.5",
+    "raw-loader": "^4.0.1",
+    "serve": "^11.3.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
