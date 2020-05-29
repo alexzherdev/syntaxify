@@ -6,8 +6,8 @@ export default {
   ArrayPattern(path) {
     if (path.listKey === 'params') {
       // function foo([a]) {}
-      this.hints.push({ loc: path.node.loc, message: arrayParameterDestructuring, spec: 'es2015' });
-      this.tree.children.push({ type: 'ArrayParameterDestructuring', node: path.node });
+      this.hints.push({ loc: path.node.loc, message: arrayParameterDestructuring });
+      this.tree.children.push({ text: path.toString(), node: path.node });
     } else if (
       // skip nested ArrayPatterns like [a] in [[a], b]
       path.listKey !== 'elements' &&
@@ -15,8 +15,8 @@ export default {
     ) {
       // const [a] = foo;
       // [x] = bar;
-      this.hints.push({ loc: path.node.loc, message: arrayDestructuringAssignment, spec: 'es2015' });
-      this.tree.children.push({ type: 'ArrayDestructuringAssignment', node: path.node });
+      this.hints.push({ loc: path.node.loc, message: arrayDestructuringAssignment });
+      this.tree.children.push({ text: path.toString(), node: path.node });
     }
   },
 };

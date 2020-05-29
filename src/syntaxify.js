@@ -11,7 +11,7 @@ export default function syntaxify(code) {
   try {
     const hints = [];
     const ast = parser.parse(code, { sourceType: 'unambiguous' });
-    const tree = { type: 'program', label: 'Program', children: [] };
+    const tree = { type: 'program', text: 'Program', children: [] };
     traverse(ast, visitors, {}, { hints, tree });
 
     return { hints, tree };

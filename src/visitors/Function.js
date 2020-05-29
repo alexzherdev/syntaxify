@@ -13,7 +13,15 @@ export default {
       } else {
         label = 'function';
       }
-      const newTreeNode = { type: 'function', label, node: path.node, parent: this.tree, children: [] };
+      const newTreeNode = {
+        text: label,
+        node: path.node,
+        parent: this.tree,
+        children: [],
+        itree: {
+          icon: 'function',
+        },
+      };
       this.tree.children.push(newTreeNode);
       this.tree = newTreeNode;
     },

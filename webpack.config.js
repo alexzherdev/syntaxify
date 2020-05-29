@@ -10,18 +10,20 @@ module.exports = {
   //   filename: 'app.js'
   // },
   module: {
-    rules: [{
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader']
-    }, {
-      test: /\.ttf$/,
-      use: ['file-loader']
-    }, {
-      test: /\.md$/,
-      use: ['raw-loader']
-    }]
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(ttf|svg)$/,
+        use: ['file-loader'],
+      },
+      {
+        test: /\.md$/,
+        use: ['raw-loader'],
+      },
+    ],
   },
-  plugins: [
-    new MonacoWebpackPlugin(),
-  ]
+  plugins: [new MonacoWebpackPlugin()],
 };

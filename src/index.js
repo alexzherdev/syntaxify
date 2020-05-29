@@ -1,5 +1,8 @@
 import * as monaco from 'monaco-editor';
+import InspireTree from 'inspire-tree';
+import InspireTreeDOM from 'inspire-tree-dom';
 import syntaxify from './syntaxify';
+import './styles.css';
 
 const editor = monaco.editor.create(document.getElementById('editor'), {
   value: ['function x([bar, baz]) {', '\tconst [x, y] = [1, 2];', '\tconsole.log("Hello world!");', '}'].join('\n'),
@@ -24,25 +27,18 @@ function onChange() {
 }
 
 function renderTree(tree) {
-  const container = document.getElementById('tree');
-  container.innerHTML = '';
+  const inspireTree = new InspireTree({
+    data: tree.children,
+  });
+  inspireTree.expandDeep();
 
-  function printNode(node, depth) {
-    if (node) {
-      const el = document.createElement('div');
-      el.innerHTML = node.label;
-      el.style.paddingLeft = `${depth * 8}px`;
-      container.appendChild(el);
-      if (node.children) {
-        node.children.forEach((child) => {
-          printNode(child, depth + 1);
-        });
-      }
-    }
-  }
+  new InspireTreeDOM(inspireTree, {
+    target: '#tree',
+  });
 
-  tree.children.forEach((child) => {
-    printNode(child, 0);
+  inspireTree.on('node.click', function (event, node) {
+    // event.preventTreeDefault(); // Cancels default listener
+    editor.setPosition({ column: 1, lineNumber: 1 });
   });
 }
 

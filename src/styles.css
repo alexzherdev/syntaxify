@@ -1,0 +1,116 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.syntaxify-hint {
+  background-color: papayawhip;
+  opacity: 0.8;
+}
+
+.container {
+  display: flex;
+}
+
+#editor {
+  flex-basis: 75%;
+  flex-shrink: 1;
+}
+
+#tree {
+  flex-basis: 25%;
+  flex-shrink: 1;
+  font-family: Segoe UI, Verdana, Helvetica, Sans-Serif;
+  font-size: 12px;
+  min-width: 500px;
+}
+
+.inspire-tree li > .title-wrap {
+  min-height: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.inspire-tree .toggle {
+  height: 25px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 25px;
+  z-index: 2;
+}
+
+.inspire-tree .icon::before {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  content: '';
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+}
+
+.inspire-tree .icon-expand::before {
+  background-image: url('./assets/chevron-right.svg');
+  /* border-radius: 3px; */
+  margin-left: -1px;
+}
+
+.inspire-tree .icon-collapse::before {
+  background-image: url('./assets/chevron-down.svg');
+  /* border-radius: 3px; */
+  margin-left: -1px;
+}
+
+.inspire-tree .collapsed > ol {
+  display: none;
+}
+
+.inspire-tree .title {
+  cursor: default;
+  padding-left: 34px;
+  position: relative;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.inspire-tree .title.icon-file-empty {
+  padding-left: 16px;
+}
+
+.inspire-tree .icon::before {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  content: '';
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+}
+
+.inspire-tree .title::before {
+  left: 16px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  vertical-align: top;
+}
+
+.inspire-tree ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.inspire-tree li {
+  padding-left: 8px;
+}
+
+.inspire-tree li .class::before {
+  background-image: url('./assets/symbol-class.svg');
+}
+
+.inspire-tree li .function::before {
+  background-image: url('./assets/symbol-method.svg');
+}
