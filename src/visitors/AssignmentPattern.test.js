@@ -1,14 +1,14 @@
 import * as parser from '@babel/parser';
 import { t } from '@babel/types';
 import traverse from '@babel/traverse';
-import AssignmentPattern from './AssignmentPattern';
+import visitor from './AssignmentPattern';
 
 it('detects function default parameters', () => {
   const code = 'function foo(x = 1) {}';
   const hints = [];
   const ast = parser.parse(code);
 
-  traverse(ast, AssignmentPattern, {}, { hints, tree: { children: [] } });
+  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -29,7 +29,7 @@ it('detects default values in object destructuring', () => {
   const hints = [];
   const ast = parser.parse(code);
 
-  traverse(ast, AssignmentPattern, {}, { hints, tree: { children: [] } });
+  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -50,7 +50,7 @@ it('detects default values in array destructuring', () => {
   const hints = [];
   const ast = parser.parse(code);
 
-  traverse(ast, AssignmentPattern, {}, { hints, tree: { children: [] } });
+  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {

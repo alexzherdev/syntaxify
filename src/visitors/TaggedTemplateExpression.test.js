@@ -1,10 +1,10 @@
 import * as parser from '@babel/parser';
 import { t } from '@babel/types';
 import traverse from '@babel/traverse';
-import visitor from './ObjectProperty';
+import visitor from './TaggedTemplateExpression';
 
-it('detects computed object properties', () => {
-  const code = 'const x = { [foo]: 1 };';
+it('detects tagged templates', () => {
+  const code = 'tag`asd`';
   const hints = [];
   const ast = parser.parse(code);
 
@@ -13,11 +13,12 @@ it('detects computed object properties', () => {
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
       "end": Position {
-        "column": 20,
+        "column": 3,
         "line": 1,
       },
+      "identifierName": "tag",
       "start": Position {
-        "column": 12,
+        "column": 0,
         "line": 1,
       },
     }

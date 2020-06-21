@@ -1,14 +1,14 @@
 import * as parser from '@babel/parser';
 import { t } from '@babel/types';
 import traverse from '@babel/traverse';
-import ArrayPattern from './ArrayPattern';
+import visitor from './ArrayPattern';
 
 it('detects array destructuring assignment with variable declaration', () => {
   const code = 'const [x] = foo;';
   const hints = [];
   const ast = parser.parse(code);
 
-  traverse(ast, ArrayPattern, {}, { hints, tree: { children: [] } });
+  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -29,7 +29,7 @@ it('detects array destructuring assignment without variable declaration', () => 
   const hints = [];
   const ast = parser.parse(code);
 
-  traverse(ast, ArrayPattern, {}, { hints, tree: { children: [] } });
+  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -50,7 +50,7 @@ it('detects array parameter destructuring', () => {
   const hints = [];
   const ast = parser.parse(code);
 
-  traverse(ast, ArrayPattern, {}, { hints, tree: { children: [] } });
+  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -71,7 +71,7 @@ it('skips nested patterns', () => {
   const hints = [];
   const ast = parser.parse(code);
 
-  traverse(ast, ArrayPattern, {}, { hints, tree: { children: [] } });
+  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
   expect(hints.length).toBe(1);
 });
 
@@ -81,7 +81,7 @@ it('correctly handles parameter destructuring nested under assignment', () => {
   const tree = { children: [] };
   const ast = parser.parse(code);
 
-  traverse(ast, ArrayPattern, {}, { hints, tree });
+  traverse(ast, visitor, {}, { hints, tree });
   expect(tree.children.length).toBe(1);
   // TODO:
 });
