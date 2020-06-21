@@ -19,10 +19,6 @@ module.exports = {
         test: /\.(ttf|svg)$/,
         use: ['file-loader'],
       },
-      {
-        test: /\.md$/,
-        use: ['raw-loader'],
-      },
     ],
   },
   plugins: [new MonacoWebpackPlugin()],

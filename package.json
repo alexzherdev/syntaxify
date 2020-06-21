@@ -35,7 +35,6 @@
     "jest-raw-loader": "^1.0.1",
     "monaco-editor-webpack-plugin": "^1.9.0",
     "prettier": "^2.0.5",
-    "raw-loader": "^4.0.1",
     "serve": "^11.3.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
