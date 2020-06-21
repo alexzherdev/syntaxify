@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { formatMessage } from './helpers';
+import { addHint } from './helpers';
 
 const defaultFunctionParameters = {
   title: 'Default parameters',
@@ -22,13 +22,11 @@ export default {
   AssignmentPattern(path) {
     if (path.listKey === 'params') {
       // function foo(a = 1) {}
-      this.hints.push({ loc: path.node.loc, message: formatMessage(defaultFunctionParameters) });
-      this.tree.children.push({ text: path.toString(), node: path.node });
+      addHint(this, path, defaultFunctionParameters);
     } else if (t.isArrayPattern(path.parentPath) || t.isObjectProperty(path.parentPath)) {
       // const [a = 1] = [];
       // const { b = 1 } = {};
-      this.hints.push({ loc: path.node.loc, message: formatMessage(defaultValuesDestructuring) });
-      this.tree.children.push({ text: path.toString(), node: path.node });
+      addHint(this, path, defaultValuesDestructuring);
     }
   },
 };

@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { formatMessage } from './helpers';
+import { addHint } from './helpers';
 
 const objectDestructuringAssignment = {
   title: 'Object Destructuring Assignment',
@@ -27,8 +27,7 @@ export default {
   ObjectPattern(path) {
     if (path.listKey === 'params') {
       // function foo({ a }) {}
-      this.hints.push({ loc: path.node.loc, message: formatMessage(objectParameterDestructuring) });
-      this.tree.children.push({ text: path.toString(), node: path.node });
+      addHint(this, path, objectParameterDestructuring);
     } else if (
       // skip nested ObjectPatterns like { b } in { a: { b }}
       path.parentPath.listKey !== 'properties' &&
@@ -36,8 +35,7 @@ export default {
     ) {
       // const { a } = foo;
       // { x } = bar;
-      this.hints.push({ loc: path.node.loc, message: formatMessage(objectDestructuringAssignment) });
-      this.tree.children.push({ text: path.toString(), node: path.node });
+      addHint(this, path, objectDestructuringAssignment);
     }
   },
 };

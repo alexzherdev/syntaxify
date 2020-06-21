@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { formatMessage } from './helpers';
+import { addHint } from './helpers';
 
 const arrayParameterDestructuring = {
   title: 'Array Parameter Destructuring',
@@ -26,8 +26,7 @@ export default {
   ArrayPattern(path) {
     if (path.listKey === 'params') {
       // function foo([a]) {}
-      this.hints.push({ loc: path.node.loc, message: formatMessage(arrayParameterDestructuring) });
-      this.tree.children.push({ text: path.toString(), node: path.node });
+      addHint(this, path, arrayParameterDestructuring);
     } else if (
       // skip nested ArrayPatterns like [a] in [[a], b]
       path.listKey !== 'elements' &&
@@ -35,8 +34,7 @@ export default {
     ) {
       // const [a] = foo;
       // [x] = bar;
-      this.hints.push({ loc: path.node.loc, message: formatMessage(arrayDestructuringAssignment) });
-      this.tree.children.push({ text: path.toString(), node: path.node });
+      addHint(this, path, arrayDestructuringAssignment);
     }
   },
 };
