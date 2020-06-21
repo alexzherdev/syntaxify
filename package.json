@@ -1,7 +1,7 @@
 {
   "name": "syntaxify",
   "version": "1.0.0",
-  "description": "",
+  "description": "Highlights various syntactic features used within a piece of JavaScript code",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/alexzherdev/syntaxify.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Alex Zherdev",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/alexzherdev/syntaxify/issues"
   },
