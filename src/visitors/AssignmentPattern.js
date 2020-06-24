@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { addHint } from './helpers';
 
 const defaultFunctionParameters = {
   title: 'Default parameters',
@@ -22,11 +21,11 @@ export default {
   AssignmentPattern(path) {
     if (path.listKey === 'params') {
       // function foo(a = 1) {}
-      addHint(this, path, defaultFunctionParameters);
+      this.addHint(path, defaultFunctionParameters);
     } else if (t.isArrayPattern(path.parentPath) || t.isObjectProperty(path.parentPath)) {
       // const [a = 1] = [];
       // const { b = 1 } = {};
-      addHint(this, path, defaultValuesDestructuring);
+      this.addHint(path, defaultValuesDestructuring);
     }
   },
 };

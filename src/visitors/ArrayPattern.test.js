@@ -1,14 +1,11 @@
-import * as parser from '@babel/parser';
-import { t } from '@babel/types';
-import traverse from '@babel/traverse';
+import traverse from '../traverse';
 import visitor from './ArrayPattern';
 
 it('detects array destructuring assignment with variable declaration', () => {
   const code = 'const [x] = foo;';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -26,10 +23,9 @@ it('detects array destructuring assignment with variable declaration', () => {
 
 it('detects array destructuring assignment without variable declaration', () => {
   const code = 'let x; [x] = foo;';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -47,10 +43,9 @@ it('detects array destructuring assignment without variable declaration', () => 
 
 it('detects array parameter destructuring', () => {
   const code = 'function x([a]) {}';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -68,20 +63,17 @@ it('detects array parameter destructuring', () => {
 
 it('skips nested patterns', () => {
   const code = 'function x([a, [b]]) {}';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
 });
 
 it('correctly handles parameter destructuring nested under assignment', () => {
   const code = 'const x = function x([a]) {}';
-  const hints = [];
-  const tree = { children: [] };
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree });
+  const { tree } = traverse(code, visitor);
+
   expect(tree.children.length).toBe(1);
   // TODO:
 });

@@ -1,14 +1,11 @@
-import * as parser from '@babel/parser';
-import { t } from '@babel/types';
-import traverse from '@babel/traverse';
+import traverse from '../traverse';
 import visitor from './RestElement';
 
 it('detects rest parameters', () => {
   const code = 'function x(a, ...rest) {}';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -26,10 +23,9 @@ it('detects rest parameters', () => {
 
 it('detects rest object destructuring', () => {
   const code = 'const { x, ...rest } = foo;';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {
@@ -47,10 +43,9 @@ it('detects rest object destructuring', () => {
 
 it('detects rest array destructuring', () => {
   const code = 'const [x, ...rest] = foo;';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {

@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { addHint } from './helpers';
 
 const forOf = {
   title: '`for...of` Statement',
@@ -10,6 +9,6 @@ const forOf = {
 export default {
   ForOfStatement(path) {
     // TODO: extract `for (...)` part
-    addHint(this, path, forOf);
+    this.addHint(path, forOf);
   },
 };

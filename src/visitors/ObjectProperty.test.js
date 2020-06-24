@@ -1,14 +1,11 @@
-import * as parser from '@babel/parser';
-import { t } from '@babel/types';
-import traverse from '@babel/traverse';
+import traverse from '../traverse';
 import visitor from './ObjectProperty';
 
 it('detects computed object properties', () => {
   const code = 'const x = { [foo]: 1 };';
-  const hints = [];
-  const ast = parser.parse(code);
 
-  traverse(ast, visitor, {}, { hints, tree: { children: [] } });
+  const { hints } = traverse(code, visitor);
+
   expect(hints.length).toBe(1);
   expect(hints[0].loc).toMatchInlineSnapshot(`
     SourceLocation {

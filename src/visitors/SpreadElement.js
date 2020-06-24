@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { addHint } from './helpers';
 
 const spreadSyntax = {
   title: 'Spread Syntax',
@@ -9,6 +8,6 @@ const spreadSyntax = {
 
 export default {
   SpreadElement(path) {
-    addHint(this, path, spreadSyntax);
+    this.addHint(path, spreadSyntax);
   },
 };

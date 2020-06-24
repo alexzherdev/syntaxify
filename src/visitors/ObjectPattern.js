@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { addHint } from './helpers';
 
 const objectDestructuringAssignment = {
   title: 'Object Destructuring Assignment',
@@ -27,7 +26,7 @@ export default {
   ObjectPattern(path) {
     if (path.listKey === 'params') {
       // function foo({ a }) {}
-      addHint(this, path, objectParameterDestructuring);
+      this.addHint(path, objectParameterDestructuring);
     } else if (
       // skip nested ObjectPatterns like { b } in { a: { b }}
       path.parentPath.listKey !== 'properties' &&
@@ -35,7 +34,7 @@ export default {
     ) {
       // const { a } = foo;
       // { x } = bar;
-      addHint(this, path, objectDestructuringAssignment);
+      this.addHint(path, objectDestructuringAssignment);
     }
   },
 };

@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { addHint } from './helpers';
 
 const taggedTemplate = {
   title: 'Tagged Templates',
@@ -11,6 +10,6 @@ const taggedTemplate = {
 
 export default {
   TaggedTemplateExpression(path) {
-    addHint(this, path.get('tag'), taggedTemplate);
+    this.addHint(path.get('tag'), taggedTemplate);
   },
 };

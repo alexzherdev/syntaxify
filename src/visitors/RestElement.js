@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { addHint } from './helpers';
 
 const restParameters = {
   title: 'Rest Parameters',
@@ -27,11 +26,11 @@ const restArrayDestructuring = {
 export default {
   RestElement(path) {
     if (path.listKey === 'params') {
-      addHint(this, path, restParameters);
+      this.addHint(path, restParameters);
     } else if (path.listKey === 'properties') {
-      addHint(this, path, restObjectDestructuring);
+      this.addHint(path, restObjectDestructuring);
     } else if (path.listKey === 'elements') {
-      addHint(this, path, restArrayDestructuring);
+      this.addHint(path, restArrayDestructuring);
     }
   },
 };

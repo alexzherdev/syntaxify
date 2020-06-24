@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { addHint } from './helpers';
 
 const computedProperty = {
   title: 'Computed Property Names',
@@ -12,7 +11,7 @@ const computedProperty = {
 export default {
   ObjectProperty(path) {
     if (path.node.computed) {
-      addHint(this, path, computedProperty);
+      this.addHint(path, computedProperty);
     }
   },
 };
