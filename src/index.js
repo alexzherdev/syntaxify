@@ -5,7 +5,19 @@ import syntaxify from './syntaxify';
 import './styles.css';
 
 const editor = monaco.editor.create(document.getElementById('editor'), {
-  value: ['function x([bar, baz]) {', '\tconst [x, y] = [1, 2];', '\tconsole.log("Hello world!");', '}'].join('\n'),
+  value: `class Class {
+  method([ item ], ...rest) {
+    const { renamed: tag } = item;
+    const [one, two] = rest;
+    function innerFunction() {
+      tag\`asd\`;
+    }
+  }
+
+  anotherMethod(foo) {
+    const spread = [...foo];
+  }
+}`,
   language: 'javascript',
 });
 
