@@ -1,14 +1,9 @@
 const path = require('path');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  // entry: './src/index.js',
-  // output: {
-  //   path: path.resolve(__dirname, 'dist'),
-  //   filename: 'app.js'
-  // },
   module: {
     rules: [
       {
@@ -21,5 +16,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [new MonacoWebpackPlugin()],
+  plugins: [
+    new MonacoWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: './src/index.html', to: './index.html' }],
+    }),
+  ],
 };
