@@ -1,3 +1,9 @@
+const klass = {
+  title: 'Classes',
+  body: "Classes are primarily syntactical sugar over JavaScript's existing prototype-based inheritance",
+  resources: ['[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)'],
+};
+
 export default {
   Class: {
     enter(path) {
@@ -18,6 +24,17 @@ export default {
       };
       this.tree.children.push(newTreeNode);
       this.tree = newTreeNode;
+
+      const { loc } = path.node;
+      this.addHint(
+        path,
+        klass,
+        {
+          start: loc.start,
+          end: { line: loc.start.line, column: loc.start.column + 'class'.length },
+        },
+        true
+      );
     },
     exit(path) {
       this.tree = this.tree.parent;

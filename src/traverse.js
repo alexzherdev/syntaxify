@@ -13,9 +13,11 @@ function formatMessage({ title, body, resources }) {
   `;
 }
 
-function addHint(path, messageDetails) {
-  this.hints.push({ loc: path.node.loc, message: formatMessage(messageDetails) });
-  this.tree.children.push({ text: path.toString(), node: path.node });
+function addHint(path, messageDetails, loc = path.node.loc, skipTree = false) {
+  this.hints.push({ loc, message: formatMessage(messageDetails) });
+  if (!skipTree) {
+    this.tree.children.push({ text: path.toString(), node: path.node });
+  }
 }
 
 export default function traverse(code, visitors) {
